@@ -133,4 +133,90 @@ document.querySelector("span[data-time=seconds]").textContent = localTime.getSec
 
 
 
+//Loops - For Loop
+
+// for (let a = 0; a<10 ; a++ ){
+
+//     console.log(a);
+
+// }
+
+// --------Loops in arrays
+
+// let animals = ["dog", "cat", "lion"]
+
+// for (let a=0 ; a<animals.length; a++){
+//     console.log(animals[a]);
+// }
+
+// ---------Enhanced For loop (for in)
+
+// let animals = ["dog", "cat", "lion"]
+
+// for (let a in animals){
+//     console.log(animals[a]);
+// }
+
+
+// ------For loop in an object (get keys)
+
+// let animal = {"name": "dog", "color" : "white"};
+
+// for (let a in animal){
+//     console.log(a);
+// }
+
+
+// ------For loop in an object (get values)
+
+
+// let animals = {"name": "dog", "color" : "white"};
+
+// for (let a in animal){
+//     console.log(animals[a]);
+// }
+
+// ------For loop in an object (get both keys and values)
+
+
+// let animaltype = {"name": "dog", "color" : "white"};
+
+// for (let a in animal){
+//     console.log(a + ":" + animaltype[a]);
+// }
+
+
+
+// Project - Gallery Section
+
+const galleryImages = [
+    {
+    src: "./assets/gallery/image1.jpg",
+    alt: "Thumbnail Image 1"
+    },
+    {
+    src: "./assets/gallery/image2.jpg",
+    alt: "Thumbnail Image 2"
+    },
+    {
+    src: "./assets/gallery/image3.jpg",
+    alt: "Thumbnail Image 3"
+    }
+];
+
+// for (let i in galleryImages){
+//     console.log(galleryImages[i]);
+// }
+
+// galleryImages.forEach(function(image, index){
+//     console.log(index);
+// })
+
+galleryImages.forEach(function(image, index){
+    console.log(image);
+})
+
+
+
+
 
