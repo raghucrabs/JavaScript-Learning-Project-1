@@ -17,44 +17,44 @@ const galleryImages = [
     }
 ];
 
-// const products = [
-//     {
-//       title: "AstroFiction",
-//       author: "John Doe",
-//       price: 49.9,
-//       image: "./assets/products/img6.png"
-//     },
-//     {
-//       title: "Space Odissey",
-//       author: "Marie Anne",
-//       price: 35,
-//       image: "./assets/products/img1.png"
-//     },
-//     {
-//       title: "Doomed City",
-//       author: "Jason Cobert",
-//       price: 0,
-//       image: "./assets/products/img2.png"
-//     },
-//     {
-//       title: "Black Dog",
-//       author: "John Doe",
-//       price: 85.35,
-//       image: "./assets/products/img3.png"
-//     },
-//     {
-//       title: "My Little Robot",
-//       author: "Pedro Paulo",
-//       price: 0,
-//       image: "./assets/products/img5.png"
-//     },
-//     {
-//       title: "Garden Girl",
-//       author: "Ankit Patel",
-//       price: 45,
-//       image: "./assets/products/img4.png"
-//     }
-//   ]
+const products = [
+    {
+      title: "AstroFiction",
+      author: "John Doe",
+      price: 49.9,
+      image: "./assets/products/img6.png"
+    },
+    {
+      title: "Space Odissey",
+      author: "Marie Anne",
+      price: 35,
+      image: "./assets/products/img1.png"
+    },
+    {
+      title: "Doomed City",
+      author: "Jason Cobert",
+      price: 0,
+      image: "./assets/products/img2.png"
+    },
+    {
+      title: "Black Dog",
+      author: "John Doe",
+      price: 85.35,
+      image: "./assets/products/img3.png"
+    },
+    {
+      title: "My Little Robot",
+      author: "Pedro Paulo",
+      price: 0,
+      image: "./assets/products/img5.png"
+    },
+    {
+      title: "Garden Girl",
+      author: "Ankit Patel",
+      price: 45,
+      image: "./assets/products/img4.png"
+    }
+  ]
 
 // Menu Section
 function menuHandler(){
@@ -186,6 +186,37 @@ function galleryHandler(){
 //     <p class="product-price">$ 49.90</p>
 //     </div>
 // </div>
+function productsHandler(){
+
+    let productSection = document.querySelector(".products-area");
+
+    // Run a loop through the product and create an HTML element("product-item") for each of them.
+
+    products.forEach(function(product, index){
+
+        // create the HTML element for the individual product
+
+        let productElement = document.createElement("div");
+        productElement.classList.add("product-item");
+
+        // Crete the product image
+
+        let productImage = document.createElement("img");
+        productImage.src = product.image;
+        productImage.alt = "Image for " + product.title;
+
+        // Add all the child HTML elements of the product
+        
+        productElement.append(productImage);
+        
+        // Add the complete individual products to the product section
+
+        productSection.append(productElement)
+
+
+    });
+
+}
 
 
 
@@ -197,6 +228,7 @@ menuHandler();
 greetingHandler();
 clockHandler();
 galleryHandler();
+productsHandler();
 
 
 
