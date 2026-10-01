@@ -56,6 +56,7 @@ const products = [
     }
   ]
 
+
 // Menu Section
 function menuHandler(){
 
@@ -175,6 +176,84 @@ function galleryHandler(){
     
 }
 
+
+function populateProducts(productList){
+
+        let productSection = document.querySelector(".products-area");
+        // empty the existing content
+        productSection.textContent = ""
+
+
+        productList.forEach(function(product, index){
+
+        // create the HTML element for the individual product
+
+        let productElement = document.createElement("div");
+        productElement.classList.add("product-item");
+
+        // Crete the product image
+
+        let productImage = document.createElement("img");
+        productImage.src = product.image;
+        productImage.alt = "Image for " + product.title;
+
+        // Create the product details section
+
+        let productDetails = document.createElement("div");
+        productDetails.classList.add("product-details");
+
+        //create product title, author, pricetitle and price
+
+        // Product Title
+
+        let productTitle = document.createElement("h3");
+        productTitle.classList.add("product-title");
+        productTitle.textContent = product.title;
+
+        // Product Author
+
+        let productAuthor = document.createElement("p");
+        productAuthor.classList.add("product-author");
+        productAuthor.textContent = product.author;
+
+        // Price Title
+
+        let priceTitle = document.createElement("p");
+        priceTitle.classList.add("price-title");
+        priceTitle.textContent = "Price";
+
+        // Product Price
+        let productPrice = document.createElement("p");
+        productPrice.classList.add("product-price");
+        productPrice.textContent = product.price > 0 ? "$" + product.price.toFixed(2) : "Free"; // Ternary conditional
+
+
+
+        // Append the product details
+        productDetails.append(productTitle);
+        productDetails.append(productAuthor);
+        productDetails.append(priceTitle);
+        productDetails.append(productPrice);
+
+
+        // Add all the child HTML elements of the product
+        
+        productElement.append(productImage);
+        productElement.append(productDetails);
+        
+        // Add the complete individual products to the product section
+
+        productSection.append(productElement)
+
+
+    });
+
+
+
+
+    
+}
+
 // Product Section
 
 // <div class="product-item">
@@ -190,36 +269,120 @@ function productsHandler(){
 
     let productSection = document.querySelector(".products-area");
 
+    // creating an array for free products
+
+    let freeProducts = products.filter(function(item){
+        return !item.price || item.price <= 0;
+    })
+    // creating an array for paid products
+
+    let paidProducts = products.filter(function(item){
+        return item.price > 0;
+    })
+
+    console.log("free: " , freeProducts);
+    console.log("paid: " , freeProducts);
+
     // Run a loop through the product and create an HTML element("product-item") for each of them.
 
-    products.forEach(function(product, index){
+    // products.forEach(function(product, index){
 
-        // create the HTML element for the individual product
+    //     // create the HTML element for the individual product
 
-        let productElement = document.createElement("div");
-        productElement.classList.add("product-item");
+    //     let productElement = document.createElement("div");
+    //     productElement.classList.add("product-item");
 
-        // Crete the product image
+    //     // Crete the product image
 
-        let productImage = document.createElement("img");
-        productImage.src = product.image;
-        productImage.alt = "Image for " + product.title;
+    //     let productImage = document.createElement("img");
+    //     productImage.src = product.image;
+    //     productImage.alt = "Image for " + product.title;
 
-        // Add all the child HTML elements of the product
+    //     // Create the product details section
+
+    //     let productDetails = document.createElement("div");
+    //     productDetails.classList.add("product-details");
+
+    //     //create product title, author, pricetitle and price
+
+    //     // Product Title
+
+    //     let productTitle = document.createElement("h3");
+    //     productTitle.classList.add("product-title");
+    //     productTitle.textContent = product.title;
+
+    //     // Product Author
+
+    //     let productAuthor = document.createElement("p");
+    //     productAuthor.classList.add("product-author");
+    //     productAuthor.textContent = product.author;
+
+    //     // Price Title
+
+    //     let priceTitle = document.createElement("p");
+    //     priceTitle.classList.add("price-title");
+    //     priceTitle.textContent = "Price";
+
+    //     // Product Price
+    //     let productPrice = document.createElement("p");
+    //     productPrice.classList.add("product-price");
+    //     productPrice.textContent = product.price > 0 ? "$" + product.price.toFixed(2) : "Free"; // Ternary conditional
+
+
+
+    //     // Append the product details
+    //     productDetails.append(productTitle);
+    //     productDetails.append(productAuthor);
+    //     productDetails.append(priceTitle);
+    //     productDetails.append(productPrice);
+
+
+    //     // Add all the child HTML elements of the product
         
-        productElement.append(productImage);
+    //     productElement.append(productImage);
+    //     productElement.append(productDetails);
         
-        // Add the complete individual products to the product section
+    //     // Add the complete individual products to the product section
 
-        productSection.append(productElement)
+    //     productSection.append(productElement)
 
 
-    });
+    // });
+
+
+
+    populateProducts(products);
+
+
+    // Array Filter
+
+    let totalProducts= products.length;
+    document.querySelector(".products-filter label[for=all] span.product-amount").textContent = totalProducts;
+    document.querySelector(".products-filter label[for=paid] span.product-amount").textContent = paidProducts.length;
+    document.querySelector(".products-filter label[for=free] span.product-amount").textContent = freeProducts.length;
+
+    let productsFilter = document.querySelector(".products-filter");
+    productsFilter.addEventListener("click", function(e){
+        // console.log(e.target.id)
+        if (e.target.id === "all"){
+            populateProducts(products);
+        } else if (e.target.id === "paid"){
+            populateProducts(paidProducts);
+
+        } else if (e.target.id === "free"){
+            populateProducts(freeProducts);
+        }
+    })
 
 }
 
+// Footer Section
 
 
+function footerHandler(){
+    let currentYear = new Date().getFullYear();
+    document.querySelector("footer").textContent = `© ${currentYear} - All rights reserved`;
+}
 
 
 // Call functions - Page Load
@@ -229,8 +392,17 @@ greetingHandler();
 clockHandler();
 galleryHandler();
 productsHandler();
+footerHandler();
 
+// Array Filter
 
+// let numbers = [1,2,3,4,5,6,7,8];
+
+// let greaterThan4 = numbers.filter(function(item){
+//     return item>4;
+// });
+
+// console.log(greaterThan4);
 
 
 // document.querySelector("#open-nav-menu").addEventListener("click", function(){
