@@ -6,15 +6,16 @@
 
 // close-nav-menu
 
+document.querySelector("#open-nav-menu").addEventListener("click", function(){
+    document.querySelector("header nav .wrapper").classList.add("nav-open");
+});
 
 document.querySelector("#close-nav-menu").addEventListener("click", function(){
     document.querySelector("header nav .wrapper").classList.remove("nav-open");
 });
 
 
-document.querySelector("#open-nav-menu").addEventListener("click", function(){
-    document.querySelector("header nav .wrapper").classList.add("nav-open");
-});
+
 
 
 
@@ -201,6 +202,10 @@ const galleryImages = [
     {
     src: "./assets/gallery/image3.jpg",
     alt: "Thumbnail Image 3"
+    },
+    {
+    src: "./assets/gallery/img1.png",
+    alt: "Thumbnail Image 4"
     }
 ];
 
@@ -212,11 +217,94 @@ const galleryImages = [
 //     console.log(index);
 // })
 
+
+//--------------------------
+
+// Main Image -Dynamic
+
+let mainImage = document.querySelector("#gallery > img")
+mainImage.src = galleryImages[0].src // making the first image in the array as the main image
+mainImage.alt = galleryImages[0].alt 
+
+
+
+//--------------------------
+
+// Thumbnails -Dynamic
+
+
+let thumbnails = document.querySelector("#gallery .thumbnails")
+
+// Previous HTML Code
+
+// <img src="./assets/gallery/image1.jpg" 
+// alt="Thumbnail Image 1" 
+// data-array-index="0" 
+// data-selected="true">
+
+//------------------thumbnail images selection
+
+
+// galleryImages.forEach(function(image, index){
+//     let thumb = document.createElement("img"); // for every image in the array, create a html element 
+//     thumb.src = image.src; // the source of the image,
+//     thumb.alt = image.alt;
+//     thumb.dataset.arrayIndex = index;
+//     thumb.dataset.selected = false; 
+
+//     // selecting the first image in the as the default main image
+//     if (index ===0){ 
+//         thumb.dataset.selected = true;
+//     } else {
+//         thumb.dataset.selected = false;
+//     }
+
+//     thumbnails.appendChild(thumb)
+
+// })
+
+// ------- Ternary Conditional for thumbnail selection
+
+// galleryImages.forEach(function(image, index){
+//     let thumb = document.createElement("img"); // for every image in the array, create a html element 
+//     thumb.src = image.src; // the source of the image,
+//     thumb.alt = image.alt;
+//     thumb.dataset.arrayIndex = index;
+//     thumb.dataset.selected = index === 0 ? true : false; // ternary conditional   
+//     thumbnails.appendChild(thumb)
+
+// })
+
+//------- Gallery functionality 
+
 galleryImages.forEach(function(image, index){
-    console.log(image);
+    let thumb = document.createElement("img"); // for every image in the array, create a html element 
+    thumb.src = image.src; // the source of the image,
+    thumb.alt = image.alt;
+    thumb.dataset.arrayIndex = index;
+    thumb.dataset.selected = index === 0 ? true : false; // ternary conditional  
+
+    thumb.addEventListener("click", function(e){
+        // console.log(e.target) // check the console whether the image is reflected or not
+        // console.log(e.target.dataset.arrayIndex)
+        let selectedIndex = e.target.dataset.arrayIndex;
+        let selectedImage = galleryImages[selectedIndex];
+
+        mainImage.src = selectedImage.src;
+        mainImage.alt = selectedImage.alt;
+
+        // make the thumbnail selection get highlighted
+        thumbnails.querySelectorAll("img").forEach(function(img){
+            img.dataset.selected = false;
+        }); // unhighlight all the images
+
+        e.target.dataset.selected = true;
+
+    })
+
+    thumbnails.appendChild(thumb)
+
 })
-
-
 
 
 
